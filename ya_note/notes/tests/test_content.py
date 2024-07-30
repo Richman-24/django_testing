@@ -24,7 +24,6 @@ class TestContentPage(TestCase):
 
     def test_note_in_list_for_author(self):
         """Отдельная заметка передаётся на страницу со списком заметок."""
-
         self.client.force_login(self.author)
         response = self.client.get(self.list_url)
         object_list = response.context['object_list']
@@ -32,7 +31,6 @@ class TestContentPage(TestCase):
 
     def test_note_not_in_list_for_another_user(self):
         """В списке заметок одного пользователя нет заметок другого."""
-
         self.client.force_login(self.author)
         response = self.client.get(self.list_url)
         object_list = response.context['object_list']
@@ -40,14 +38,12 @@ class TestContentPage(TestCase):
 
     def test_add_page_have_form(self):
         """На страницу создания заметки передается форма."""
-
         self.client.force_login(self.author)
         response = self.client.get(self.add_url)
         self.assertIn('form', response.context)
 
     def test_edit_page_have_form(self):
         """На страницу редактирования заметки передается форма."""
-        
         self.client.force_login(self.author)
         response = self.client.get(self.edit_url)
         self.assertIn('form', response.context)

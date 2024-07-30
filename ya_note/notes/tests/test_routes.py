@@ -38,7 +38,6 @@ class TestRoutes(TestCase):
 
     def test_availability_for_note_autorized_user(self):
         """Доступность страниц авторизованным пользователям."""
-
         users_statuses = (
             (self.reader, HTTPStatus.OK),
         )
@@ -56,7 +55,6 @@ class TestRoutes(TestCase):
 
     def test_availability_for_note_edit_and_delete(self):
         """Доступность страниц авторам-пользователям."""
-
         users_statuses = (
             (self.author, HTTPStatus.OK),
             (self.reader, HTTPStatus.NOT_FOUND),
@@ -75,7 +73,6 @@ class TestRoutes(TestCase):
 
     def test_redirect_for_anonymous_client(self):
         """Редирект для анонимных пользователей."""
-        
         login_url = reverse('users:login')
         for name in (
             'notes:detail',

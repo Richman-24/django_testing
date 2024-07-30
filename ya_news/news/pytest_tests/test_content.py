@@ -14,7 +14,6 @@ User = get_user_model()
 @pytest.mark.django_db
 def test_news_count(client):
     """Количество новостей на странице не превышает пагинацию."""
-
     all_news = [
         News(title=f"Новость {index}", text="Текст.")
         for index in range(settings.NEWS_COUNT_ON_HOME_PAGE + 1)
@@ -31,7 +30,6 @@ def test_news_count(client):
 @pytest.mark.django_db
 def test_news_order(client):
     """Сортировка новостей идёт от самой новых к старым."""
-
     today = timezone.now()
     all_news = [
         News(
@@ -53,7 +51,6 @@ def test_news_order(client):
 
 def test_comments_order(author, author_client, news):
     """Сортировка комментариев идёт от старых к новому."""
-
     now = timezone.now()
     for index in range(2):
         comment = Comment.objects.create(
@@ -80,7 +77,6 @@ def test_comments_order(author, author_client, news):
 )
 def test_anonymous_client_has_no_form(parametrized_client, form_status, news):
     """Анонимному пользователю недоступна форма для отправки комментария"""
-
     url = reverse("news:detail", args=(news.id,))
     response = parametrized_client.get(url)
     form_check = "form" in response.context
